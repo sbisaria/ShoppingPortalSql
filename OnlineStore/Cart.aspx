@@ -9,7 +9,8 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <asp:Label ID="MessageLabel" runat="server" Text="Items in the cart are:" ForeColor="Blue" Font-Size="XX-Large"></asp:Label>
+            <asp:GridView ID="CartGridView" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" />
                 <EditRowStyle BackColor="#2461BF" />
                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -22,6 +23,10 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
+            <asp:Label ID="Label2" runat="server" Text="Total: "></asp:Label>
+            <asp:Label ID="TotalAmout" runat="server" ForeColor="#0066FF" Text="00"></asp:Label>
+            <br />
+            <asp:Button ID="PlaceOrder" runat="server" Text="Place Order" OnClick="PlaceOrder_Click" /><asp:Button ID="Shopping" runat="server" Text="Continue Shopping.." OnClick="Shopping_Click" />
         </div>
     </form>
 </body>
