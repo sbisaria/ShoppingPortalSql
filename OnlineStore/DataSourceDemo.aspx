@@ -28,9 +28,13 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
-            <asp:SqlDataSource ID="Inventory" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnection %>" DeleteCommand="DELETE FROM [Product] WHERE [p_id] = @p_id" InsertCommand="INSERT INTO [Product] ([p_id], [Name], [Price]) VALUES (@p_id, @Name, @Price)" SelectCommand="SELECT * FROM [Product]" UpdateCommand="UPDATE [Product] SET [Name] = @Name, [Price] = @Price WHERE [p_id] = @p_id">
+            <asp:SqlDataSource ID="Inventory" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnection %>"
+                DeleteCommand="delete_product" 
+                InsertCommand="add_product" InsertCommandType="StoredProcedure"
+                SelectCommand="SELECT * FROM [Product]" UpdateCommand="UPDATE [Product] SET [Name] = @Name, [Price] = @Price WHERE [p_id] = @p_id" DeleteCommandType="StoredProcedure">
                 <DeleteParameters>
                     <asp:Parameter Name="p_id" Type="String" />
+                    <asp:Parameter Name="o_id" Type="String" />
                 </DeleteParameters>
                 <InsertParameters>
                     <asp:Parameter Name="p_id" Type="String" />
@@ -43,6 +47,30 @@
                     <asp:Parameter Name="p_id" Type="String" />
                 </UpdateParameters>
             </asp:SqlDataSource>
+        &nbsp;&nbsp;&nbsp;
+            <br />
+            <asp:Label ID="Label3" runat="server" BackColor="#0066CC" ForeColor="White" Height="30px" Text="Add new item :" Width="140px"></asp:Label>
+            <br />
+            <br />
+&nbsp;
+            <asp:Label ID="Label1" runat="server" Text="Id"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:TextBox ID="Name" runat="server"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
+&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="Name"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:TextBox ID="Price" runat="server"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            &nbsp;
+            <asp:Label ID="Label4" runat="server" Text="Price"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <br />
+&nbsp;
+            <br />
+&nbsp;
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="margin-top: 0px" Text="Add" />
         </div>
     </form>
 </body>
