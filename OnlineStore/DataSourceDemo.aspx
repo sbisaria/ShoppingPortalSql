@@ -9,10 +9,10 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="p_id" DataSourceID="Inventory" ForeColor="#333333" GridLines="None">
+            <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="p_id" DataSourceID="Inventory">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
-                    <asp:BoundField DataField="p_id" HeaderText="Product Id" ReadOnly="True" SortExpression="p_id" />
+                    <asp:BoundField DataField="p_id" HeaderText="p_id" ReadOnly="True" SortExpression="p_id" />
                     <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                     <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
                     <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
@@ -28,49 +28,34 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
-            <asp:SqlDataSource ID="Inventory" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnection %>"
-                DeleteCommand="delete_product" 
-                InsertCommand="add_product" InsertCommandType="StoredProcedure"
-                SelectCommand="SELECT * FROM [Product]" UpdateCommand="UPDATE [Product] SET [Name] = @Name, [Price] = @Price WHERE [p_id] = @p_id" DeleteCommandType="StoredProcedure">
+            <asp:SqlDataSource ID="Inventory" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineStoreConnection %>" DeleteCommand="delete_product" DeleteCommandType="StoredProcedure" InsertCommand="add_product" InsertCommandType="StoredProcedure" SelectCommand="SELECT * FROM [Product]" UpdateCommand="UPDATE [Product] SET [Name] = @Name, [Price] = @Price WHERE [p_id] = @p_id">
                 <DeleteParameters>
-                    <asp:Parameter Name="p_id" Type="String" />
-                    <asp:Parameter Name="o_id" Type="String" />
+                    <asp:Parameter Name="p_id" Type="Int32" />
                 </DeleteParameters>
                 <InsertParameters>
-                    <asp:Parameter Name="p_id" Type="String" />
                     <asp:Parameter Name="Name" Type="String" />
                     <asp:Parameter Name="Price" Type="Double" />
                 </InsertParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="Name" Type="String" />
                     <asp:Parameter Name="Price" Type="Double" />
-                    <asp:Parameter Name="p_id" Type="String" />
+                    <asp:Parameter Name="p_id" Type="Int32" />
                 </UpdateParameters>
             </asp:SqlDataSource>
-        &nbsp;&nbsp;&nbsp;
             <br />
-            <asp:Label ID="Label3" runat="server" BackColor="#0066CC" ForeColor="White" Height="30px" Text="Add new item :" Width="140px"></asp:Label>
+            <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#0066CC" Text="Add an item:"></asp:Label>
             <br />
-            <br />
-&nbsp;
-            <asp:Label ID="Label1" runat="server" Text="Id"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Label ID="Label1" runat="server" Text="Product Name"></asp:Label>
             <asp:TextBox ID="Name" runat="server"></asp:TextBox>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
-&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="Name"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Label ID="Label3" runat="server" Text="Price"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="Price" runat="server"></asp:TextBox>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-            &nbsp;
-            <asp:Label ID="Label4" runat="server" Text="Price"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             <br />
-&nbsp;
+            <asp:Label ID="Error" runat="server" ForeColor="Red"></asp:Label>
             <br />
-&nbsp;
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="margin-top: 0px" Text="Add" />
+            
+            <asp:Button ID="Add" runat="server" OnClick="Add_Click" style="margin-top: 0px" Text="Add" />
         </div>
     </form>
 </body>
