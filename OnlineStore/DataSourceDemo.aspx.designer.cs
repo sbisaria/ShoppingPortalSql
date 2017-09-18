@@ -40,13 +40,13 @@ namespace OnlineStore {
         protected global::System.Web.UI.WebControls.SqlDataSource Inventory;
         
         /// <summary>
-        /// Label2 control.
+        /// Heading control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label Heading;
         
         /// <summary>
         /// ProductName control.
@@ -67,13 +67,13 @@ namespace OnlineStore {
         protected global::System.Web.UI.WebControls.TextBox Name;
         
         /// <summary>
-        /// Label3 control.
+        /// PriceLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label PriceLabel;
         
         /// <summary>
         /// Price control.

@@ -22,23 +22,26 @@ namespace OnlineStore
         {
             if (IsInputValid() == true)
             {
-                connectionString = WebConfigurationManager.ConnectionStrings["productDb"].ConnectionString;
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                try
                 {
-                    try
+                    connectionString = WebConfigurationManager.ConnectionStrings["productDb"].ConnectionString;
+                    using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
                         string commandString = $"exec add_product '{Name.Text}','{Price.Text}'";
                         SqlCommand command = new SqlCommand(commandString, conn);
                         command.ExecuteNonQuery();
                     }
-                    catch(SqlException sqlException)
-                    {
-                        Error.Text = "Connection failed";
-                    }
+                    Name.Text = Price.Text = "";
+                    Error.Text = "";
+                    Error.Visible = false;
+                    GridView1.DataBind();
                 }
-                Name.Text = Price.Text = "";
-                GridView1.DataBind();
+                catch (Exception)
+                {
+                    Error.Text = "Some error occurred.TRy Again.";
+                    Error.Visible = true;
+                }
             }
         }
         public bool IsInputValid()
