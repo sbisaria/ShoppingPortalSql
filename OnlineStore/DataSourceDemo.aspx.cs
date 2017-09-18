@@ -25,10 +25,17 @@ namespace OnlineStore
                 connectionString = WebConfigurationManager.ConnectionStrings["productDb"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    conn.Open();
-                    string commandString = $"exec add_product '{Name.Text}','{Price.Text}'";
-                    SqlCommand command = new SqlCommand(commandString, conn);
-                    command.ExecuteNonQuery();
+                    try
+                    {
+                        conn.Open();
+                        string commandString = $"exec add_product '{Name.Text}','{Price.Text}'";
+                        SqlCommand command = new SqlCommand(commandString, conn);
+                        command.ExecuteNonQuery();
+                    }
+                    catch(SqlException sqlException)
+                    {
+                        Error.Text = "Connection failed";
+                    }
                 }
                 Name.Text = Price.Text = "";
                 GridView1.DataBind();

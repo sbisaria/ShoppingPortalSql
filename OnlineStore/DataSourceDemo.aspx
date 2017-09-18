@@ -45,11 +45,12 @@
             <br />
             <asp:Label ID="Label2" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#0066CC" Text="Add an item:"></asp:Label>
             <br />
-            <asp:Label ID="Label1" runat="server" Text="Product Name"></asp:Label>
+            <asp:Label ID="ProductName" runat="server" Text="Product Name"></asp:Label>
+&nbsp;
             <asp:TextBox ID="Name" runat="server"></asp:TextBox>
             <br />
             <asp:Label ID="Label3" runat="server" Text="Price"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="Price" runat="server"></asp:TextBox>
             <br />
             <asp:Label ID="Error" runat="server" ForeColor="Red"></asp:Label>

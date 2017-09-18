@@ -23,7 +23,7 @@ namespace OnlineStore
                 if (cart.Count == 0)
                 {
                     PlaceOrder.Visible = false;
-                    Label2.Visible = false;
+                    Total_Amount.Visible = false;
                     TotalAmout.Visible = false;
                     MessageLabel.Text = "Cart is empty";
                 }
@@ -31,7 +31,7 @@ namespace OnlineStore
                 {
                     double totalAmount = 0;
                     PlaceOrder.Visible = true;
-                    Label2.Visible = true;
+                    Total_Amount.Visible = true;
                     TotalAmout.Visible = true;
                     MessageLabel.Text = "Items in the cart are:";
                     var cartDataTable = GetCartData(cart, invertory, out totalAmount);
@@ -43,7 +43,7 @@ namespace OnlineStore
             else
             {
                 PlaceOrder.Visible = false;
-                Label2.Visible = false;
+                Total_Amount.Visible = false;
                 TotalAmout.Visible = false;
                 MessageLabel.Text = "Cart is empty.";
             }
@@ -125,7 +125,6 @@ namespace OnlineStore
             foreach (var key in cart.Keys)
             {
                 var row = inventory.Select($"p_id = {key}").First();
-                //var row = invertory.Rows[key];
                 var newCartRow = dataTable.NewRow();
                 newCartRow["ProductName"] = row["Name"];
                 newCartRow["Rate"] = row["Price"];

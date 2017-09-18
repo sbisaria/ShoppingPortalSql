@@ -23,7 +23,7 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
-            <asp:Label ID="Label2" runat="server" Text="Total: "></asp:Label>
+            <asp:Label ID="Total_Amount" runat="server" Text="Total: "></asp:Label>
             <asp:Label ID="TotalAmout" runat="server" ForeColor="#0066FF" Text="00"></asp:Label>
             <br />
             <asp:Button ID="PlaceOrder" runat="server" Text="Place Order" OnClick="PlaceOrder_Click" /><asp:Button ID="Shopping" runat="server" Text="Continue Shopping.." OnClick="Shopping_Click" />
