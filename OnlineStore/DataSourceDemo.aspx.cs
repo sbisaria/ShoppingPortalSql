@@ -39,7 +39,7 @@ namespace OnlineStore
                 }
                 catch (Exception)
                 {
-                    Error.Text = "Some error occurred.TRy Again.";
+                    Error.Text = "Some error occurred while connecting to database";
                     Error.Visible = true;
                 }
             }

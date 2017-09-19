@@ -25,20 +25,30 @@ namespace OnlineStore
             var inventory = GetData().Tables[0];
             Session["inventory"] = inventory;
             ProductGrid.DataSource = inventory;
+            Error.Text = "";
+            Error.Visible = false;
             ProductGrid.DataBind();
 
         }
 
         private DataSet GetData()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                string command = "select * from product";
-                SqlCommand cmd = new SqlCommand(command, conn);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                return ds;
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string command = "select * from product";
+                    SqlCommand cmd = new SqlCommand(command, conn);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    return ds;
+                }
+            }
+            catch (Exception)
+            {
+                Error.Text = "Some error occurred while connecting to database";
+                Error.Visible = true;
             }
         }
 

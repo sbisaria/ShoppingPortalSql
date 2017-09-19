@@ -22,6 +22,9 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
+            <br />
+            <asp:Label ID="Error" runat="server" ForeColor="Red"></asp:Label>
+            <br />
             <asp:Button ID="Checkout" runat="server" Text="Checkout" OnClick="Checkout_Click" />
         </div>
     </form>
