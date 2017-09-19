@@ -27,7 +27,7 @@ namespace OnlineStore
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-                        string commandString = $"exeproduct '{Name.Text}','{Price.Text}'";
+                        string commandString = $"exec add_product '{Name.Text}','{Price.Text}'";
                         SqlCommand command = new SqlCommand(commandString, conn);
                         command.ExecuteNonQuery();
                     }
