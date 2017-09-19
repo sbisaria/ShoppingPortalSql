@@ -15,7 +15,6 @@ namespace OnlineStore
         static string connectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void Add_Click(object sender, EventArgs e)
@@ -28,19 +27,22 @@ namespace OnlineStore
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-                        string commandString = $"exec add_product '{Name.Text}','{Price.Text}'";
+                        string commandString = $"exeproduct '{Name.Text}','{Price.Text}'";
                         SqlCommand command = new SqlCommand(commandString, conn);
                         command.ExecuteNonQuery();
                     }
                     Name.Text = Price.Text = "";
-                    Error.Text = "";
-                    Error.Visible = false;
                     GridView1.DataBind();
                 }
-                catch (Exception)
+                catch (Exception exception)
                 {
-                    Error.Text = "Some error occurred while connecting to database";
-                    Error.Visible = true;
+                    
+                    Response.Write("<script>" +
+                        "if(confirm('Some error occured'))" +
+                        "{" +
+                        "window.location='Error.aspx'" +
+                        "}" +
+                        "</script>");
                 }
             }
         }

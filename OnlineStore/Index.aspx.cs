@@ -25,14 +25,13 @@ namespace OnlineStore
             var inventory = GetData().Tables[0];
             Session["inventory"] = inventory;
             ProductGrid.DataSource = inventory;
-            Error.Text = "";
-            Error.Visible = false;
             ProductGrid.DataBind();
 
         }
 
         private DataSet GetData()
         {
+            DataSet ds = new DataSet();
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -40,16 +39,19 @@ namespace OnlineStore
                     string command = "select * from product";
                     SqlCommand cmd = new SqlCommand(command, conn);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataSet ds = new DataSet();
                     da.Fill(ds);
-                    return ds;
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                Error.Text = "Some error occurred while connecting to database";
-                Error.Visible = true;
+                Response.Write("<script>" +
+                    "if(confirm('Some error occured'))" +
+                    "{" +
+                    "window.location='Error.aspx'" +
+                    "}"+
+                    "</script>");
             }
+            return ds;
         }
 
         protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
