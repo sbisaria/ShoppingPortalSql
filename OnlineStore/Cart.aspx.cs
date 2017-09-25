@@ -15,37 +15,49 @@ namespace OnlineStore
         static string connectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-            connectionString = WebConfigurationManager.ConnectionStrings["productDb"].ConnectionString;
-            if (Session["cart"] != null)
+            try
             {
-                var invertory = (DataTable)Session["inventory"];
-                var cart = (Dictionary<string, int>)Session["cart"];
-                if (cart.Count == 0)
+                connectionString = WebConfigurationManager.ConnectionStrings["productDb"].ConnectionString;
+                if (Session["cart"] != null)
+                {
+                    var invertory = (DataTable)Session["inventory"];
+                    var cart = (Dictionary<string, int>)Session["cart"];
+                    if (cart.Count == 0)
+                    {
+                        PlaceOrder.Visible = false;
+                        Total_Amount.Visible = false;
+                        TotalAmout.Visible = false;
+                        MessageLabel.Text = "Cart is empty";
+                    }
+                    else
+                    {
+                        double totalAmount = 0;
+                        PlaceOrder.Visible = true;
+                        Total_Amount.Visible = true;
+                        TotalAmout.Visible = true;
+                        MessageLabel.Text = "Items in the cart are:";
+                        var cartDataTable = GetCartData(cart, invertory, out totalAmount);
+                        TotalAmout.Text = totalAmount.ToString();
+                        CartGridView.DataSource = cartDataTable;
+                        CartGridView.DataBind();
+                    }
+                }
+                else
                 {
                     PlaceOrder.Visible = false;
                     Total_Amount.Visible = false;
                     TotalAmout.Visible = false;
-                    MessageLabel.Text = "Cart is empty";
-                }
-                else
-                {
-                    double totalAmount = 0;
-                    PlaceOrder.Visible = true;
-                    Total_Amount.Visible = true;
-                    TotalAmout.Visible = true;
-                    MessageLabel.Text = "Items in the cart are:";
-                    var cartDataTable = GetCartData(cart, invertory, out totalAmount);
-                    TotalAmout.Text = totalAmount.ToString();
-                    CartGridView.DataSource = cartDataTable;
-                    CartGridView.DataBind();
+                    MessageLabel.Text = "Cart is empty.";
                 }
             }
-            else
+            catch(Exception exeption)
             {
-                PlaceOrder.Visible = false;
-                Total_Amount.Visible = false;
-                TotalAmout.Visible = false;
-                MessageLabel.Text = "Cart is empty.";
+                Response.Write("<script>" +
+                       "if(confirm('Some error occured while connecting to database'))" +
+                       "{" +
+                       "window.location='Error.aspx'" +
+                       "}" +
+                       "</script>");
             }
         }
 
